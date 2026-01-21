@@ -19,5 +19,5 @@ jobs:
 
     - name: Verify Arch Linux is running
       run: |
-        docker compose run --rm version \
+        docker compose run --rm latest \
           sh -c 'cat /etc/os-release | grep -E "^ID=arch$"'
