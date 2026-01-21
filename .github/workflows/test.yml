@@ -1,0 +1,23 @@
+name: Test
+on:
+  pull_request:
+  push: 
+    branches:
+    - master
+
+jobs:
+  test:
+    name: Verify build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build docker images
+      run: docker compose build --pull
+
+    - name: Verify Arch Linux is running
+      run: |
+        docker compose run --rm version \
+          sh -c 'cat /etc/os-release | grep -E "^ID=arch$"'
